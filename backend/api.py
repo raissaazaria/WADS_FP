@@ -57,7 +57,13 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
-    return db_user
+    user_response = UserResponse(
+        id=db_user.id,
+        email=db_user.email,
+        address=db_user.address
+    )
+    return user_response
+
 
 @app.get("/users/{user_id}", response_model=UserResponse)
 def get_user(user_id: int, db: Session = Depends(get_db)):

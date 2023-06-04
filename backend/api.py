@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from typing import List
 from database import SessionLocal
 from fastapi.staticfiles import StaticFiles 
+from fastapi.responses import FileResponse
 
 # Database configuration
 DATABASE_URL = "sqlite:///./users.db"
@@ -96,5 +97,9 @@ def login_user(user_login: UserLogin, db: Session = Depends(get_db)):
     if user is None or user.password != user_login.password:
         raise HTTPException(status_code=401, detail="Invalid email or password")
     return {"message": "Login successful"}
+
+@app.get("/signup")
+def signup_page():
+    return FileResponse("static/signup.html")
 
 

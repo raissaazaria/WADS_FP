@@ -105,3 +105,11 @@ for (let x = 0; x < stocks.length; x++) {
 
     stocks[x].querySelector('.available').style.width = percent + '%';
 }
+
+//close by click outside
+document.addEventListener('click',(e) => {
+    const isClosest = e.target.closest(divitoShow);
+    if(!isClosest && divPopup.classList.contains('show')){
+        divPopup.classList.remove('show')
+    }
+})

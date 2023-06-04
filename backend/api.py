@@ -5,6 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from pydantic import BaseModel
 from typing import List
 from database import SessionLocal
+from fastapi.staticfiles import StaticFiles 
 
 # Database configuration
 DATABASE_URL = "sqlite:///./users.db"
@@ -30,6 +31,11 @@ class UserResponse(BaseModel):
     id: int
     email: str
     address: str
+    
+class UserLogin(BaseModel):
+    email: str
+    password: str
+
 
 # FastAPI app
 app = FastAPI()
@@ -42,6 +48,8 @@ def get_db():
     finally:
         db.close()
 
+# Serve static files (HTML, CSS, JS)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # API endpoints
 @app.get("/users/all", response_model=List[UserResponse])
@@ -81,5 +89,12 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
     db.delete(user)
     db.commit()
     return {"message": "User deleted successfully"}
+
+@app.post("/login")
+def login_user(user_login: UserLogin, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.email == user_login.email).first()
+    if user is None or user.password != user_login.password:
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+    return {"message": "Login successful"}
 
 

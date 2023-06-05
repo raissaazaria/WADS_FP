@@ -11,7 +11,7 @@ document.getElementById('login-form').addEventListener('submit', function (event
     var response = JSON.parse(xhr.responseText);
     if (xhr.status === 200) {
       // Login successful
-      window.location.href = '/static/dashboard.html';
+      window.location.href = '/static/index.html';
     } else {
       // Login failed
       document.getElementById('response-message').textContent = 'Login failed. ' + response.detail;

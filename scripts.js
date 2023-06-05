@@ -7,11 +7,11 @@ function copyMenu(){
 
     //copy inside nav to nav
     var mainNav = document.querySelector('.header-nav nav');
-    var navplace = document.queySelector('off-canvas nav')
+    var navplace = document.querySelector('.off-canvas nav');
     navplace.innerHTML = mainNav.innerHTML;
 
     var topNav = document.querySelector('.header-top .wrapper');
-    var topPlace = document.querySelector('.off-canvas .thetop-nav')
+    var topPlace = document.querySelector('.off-canvas .thetop-nav');
     topPlace.innerHTML = topNav.innerHTML;
 }  
 copyMenu();
@@ -22,9 +22,6 @@ const menuButton = document.querySelector('.trigger'),
       addClass = document.querySelector('.site');
 menuButton.addEventListener('click', function(){
     addClass.classList.toggle('showmenu')
-})
-closeButton.addEventListener('click', function(){
-    addClass.classList.remove('showmenu')
 })
 closeButton.addEventListener('click', function(){
     addClass.classList.remove('showmenu')
@@ -42,7 +39,7 @@ function toggle(e){
 
 }
 //slider
-const swiper = new Swiper('.swiper', {
+const swiper = new swiper('.swiper', {
     loop: true,
 
     pagination: {
@@ -52,7 +49,7 @@ const swiper = new Swiper('.swiper', {
 });
 
 //show search
-const seachButton = document.querySelector('.t-search'),
+const searchButton = document.querySelector('.t-search'),
     tClose = document.querySelector('.search-close'),
     showClass = document.querySelector('.site');
 searchButton.addEventListener('click', function(){
@@ -70,7 +67,7 @@ dptButton.addEventListener('click', function() {
 })
 
 //product image slider
-var productThumb = new Swiper ('.small-image', {
+var productThumb = new swiper ('.small-image', {
     loop: true,
     spaceBetween: 10,
     slidesPerView: 3,
@@ -83,7 +80,7 @@ var productThumb = new Swiper ('.small-image', {
     }
 });
 
-var productBig = new Swiper ('.big-image', {
+var productBig = new swiper ('.big-image', {
     loop: true,
     autoHeight: true,
     navigation: {
@@ -121,7 +118,7 @@ divTrigger.addEventListener('click', () =>{
 
 //close by click outside
 document.addEventListener('click',(e) => {
-    const isClosest = e.target.closest(divitoShow);
+    const isClosest = e.target.closest(divtoShow);
     if(!isClosest && divPopup.classList.contains('show')){
         divPopup.classList.remove('show')
     }

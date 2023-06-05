@@ -1328,6 +1328,7 @@ form.search button:hover{
 .review-form .rating {
     flex-wrap: wrap;
 }
+
 .review-form p {
     font-size: 1.25em;
     margin-right: 1em;
